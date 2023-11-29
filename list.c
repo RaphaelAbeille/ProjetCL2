@@ -105,4 +105,4 @@ int isLevelListEmpty(t_list l, int niveau3)
     }
     return rep;
 }
-};
+
