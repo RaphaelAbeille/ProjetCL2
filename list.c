@@ -8,7 +8,7 @@ t_list * creationListe(int nb_max_niveaux)
 {
     t_list * l = (t_list *)malloc(sizeof(t_list));
     l->max_level = nb_max_niveaux;
-    l->head = (t_list**)malloc(nb_max_niveaux * sizeof(t_list*));
+    l->head = (t_cell*)malloc(nb_max_niveaux * sizeof(t_cell**));
     for(int i=0;i<nb_max_niveaux;i++)
     {
         l->head[i] = NULL;
