@@ -39,7 +39,22 @@ t_list * insererCellTete(t_list * l,t_cell * c,int niveau2)
 
     printf("La cellule a bien ete ajoutee A la liste \n");
     return l;
-};
+}
+
+// dès qu'insère une cellule en dans un niveau i, il faut l'insérer dans tous les autres niveau j tq j < i
+void insert_head(t_list * l, t_cell * c, int level) {
+    if (level < l->max_level && level >= 0) {
+        // si l->head[level] == NULL
+        if (isLevelListEmpty(*l, level)) {
+            l->head[level] = c;
+        } else {
+            c->next[level] = l->head[level];
+            l->head[level] = c;
+        }
+        insert_head(l, c, level - 1);
+    }
+}
+
 void afficherUnNiveau(t_list l, int niveau)
 {
     t_cell * courant;
@@ -60,7 +75,27 @@ void afficherUnNiveau(t_list l, int niveau)
         }
         printf("[%d|@]--> NULL\n",courant->value);
     }
-};
+}
+
+void print_list(t_list l, int level) {
+    if (isLevelListEmpty(l, level)) {
+        printf("[list head_%d]--> NULL\n",level);
+    } else {
+        t_cell * cur = l.head[level];
+        while (cur != NULL) {
+            printf("[%d|@]-->",cur->value);
+            cur = cur->next[level];
+        }
+        printf(" NULL\n");
+    }
+}
+
+void print_level_list(t_list l) {
+    for (int i = 0; i < l.max_level; ++i) {
+        print_list(l, i);
+    }
+}
+
 void afficherTousNiveaux(t_list l)
 {
     int rep = isListEmpty(l);
@@ -94,15 +129,6 @@ int isListEmpty(t_list l)
 }
 int isLevelListEmpty(t_list l, int niveau3)
 {
-    int rep;
-    if(l.head[niveau3]==NULL)
-    {
-        rep =1;
-    }
-    else
-    {
-        rep =0;
-    }
-    return rep;
+    return l.head[niveau3] == NULL;
 }
 

@@ -12,3 +12,6 @@ void afficherUnNiveau(t_list l,int niveau);
 void afficherTousNiveaux(t_list l);
 int isListEmpty(t_list l);
 int isLevelListEmpty(t_list l, int niveau3);
+void insert_head(t_list * l, t_cell * c, int level);
+void print_list(t_list l, int level);
+void print_level_list(t_list l);
